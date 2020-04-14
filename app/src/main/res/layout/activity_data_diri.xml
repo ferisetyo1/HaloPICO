@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".modul.datadiri.DataDiriActivity">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:background="@color/PrimaryKemenkes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/photoprofil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:scaleType="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            app:srcCompat="@drawable/ic_image" />
+
+        <TextView
+            android:id="@+id/nama_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Hai,"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/photoprofil"
+            app:layout_constraintStart_toStartOf="@+id/photoprofil"
+            app:layout_constraintTop_toBottomOf="@+id/photoprofil" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perkenalkan dirimu lebih lanjut"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nama_user" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_lyt_tgllahir"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tanggal_lahir"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_tgllahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:textColor="@color/PrimaryKemenkes"
+                    android:textCursorDrawable="@null" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lyt_dropdown_jk"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/jenis_kelamin"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:endIconTint="@color/PrimaryKemenkes"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_jk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/PrimaryKemenkes" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lyt_dropdown_pendidikan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Riwayat Pendidikan"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:endIconTint="@color/PrimaryKemenkes"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_pendidikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/PrimaryKemenkes" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lyt_dropdown_pekerjaan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pekerjaan"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:endIconTint="@color/PrimaryKemenkes"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_pekerjaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/PrimaryKemenkes" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lyt_dropdown_teKes"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tenaga_kesehatan"
+                android:visibility="gone"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:endIconTint="@color/PrimaryKemenkes"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_tekes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/PrimaryKemenkes" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lyt_dropdown_provinsi"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/provinsi"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:endIconTint="@color/PrimaryKemenkes"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_provinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/PrimaryKemenkes" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lyt_dropdown_kota"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/kota"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:endIconTint="@color/PrimaryKemenkes"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_kota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:inputType="none"
+                    android:textColor="@color/PrimaryKemenkes" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_lyt_alamat"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alamat Lengkap"
+                app:boxStrokeColor="@color/PrimaryKemenkes"
+                app:counterEnabled="true"
+                app:counterMaxLength="250"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:hintTextColor="@color/PrimaryKemenkes">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/PrimaryKemenkes"
+                    android:textCursorDrawable="@null" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="processSimpan"
+                android:text="@string/simpan"
+                app:backgroundTint="@color/SecondKemenkes"
+                app:cornerRadius="25dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
