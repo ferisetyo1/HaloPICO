@@ -28,7 +28,9 @@ class UserModel(
     var imgURL:String,
     var lastSkrinning: Timestamp,
     var regTime: Timestamp,
-    var statusData: Int
+    var statusData: Int,
+    var selfReportHasil:String,
+    var selfReport:ArrayList<LogSkrinningModel.JawabanUser>
 ) : Parcelable {
 
     constructor() : this(
@@ -46,11 +48,14 @@ class UserModel(
         "",
         Timestamp.now(),
         Timestamp.now(),
-        -1
+        -1,
+        "",
+        arrayListOf()
     )
 
     override fun toString(): String {
-        return "UserModel(nama='$nama', userName='$userName', tglLahir='$tglLahir', kota='$kota', provinsi='$provinsi', nohp='$nohp', jenisKelamin='$jenisKelamin', pekerjaan='$pekerjaan', riwayatPendidikan='$riwayatPendidikan', alamat='$alamat', kondisiPsikologis='$kondisiPsikologis', imgURL='$imgURL', lastSkrinning=$lastSkrinning, regTime=$regTime, statusData=$statusData)"
+        return "UserModel(nama='$nama', userName='$userName', tglLahir='$tglLahir', kota='$kota', provinsi='$provinsi', nohp='$nohp', jenisKelamin='$jenisKelamin', pekerjaan='$pekerjaan', riwayatPendidikan='$riwayatPendidikan', alamat='$alamat', kondisiPsikologis='$kondisiPsikologis', imgURL='$imgURL', lastSkrinning=$lastSkrinning, regTime=$regTime, statusData=$statusData, selfReportHasil='$selfReportHasil', selfReport=$selfReport)"
     }
+
 
 }

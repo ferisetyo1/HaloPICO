@@ -30,8 +30,7 @@ class SkrinningActivity : AppCompatActivity() {
     var counter = 0
     var pointSkrinning = 0
     val mDB = FirebaseFirestore.getInstance()
-    val curUser = FirebaseAuth.getInstance().currentUser
-    val reffUser = mDB.collection(Const.user).document(curUser?.uid!!)
+
     var tipe = 0
     var listJawaban = ArrayList<LogSkrinningModel.JawabanUser>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +92,6 @@ class SkrinningActivity : AppCompatActivity() {
                     }
                     button.setOnClickListener {
                         lyt_jawaban.removeAllViews()
-                        updateSoal(listSoalModel)
                         pointSkrinning += jawabanModel.point
                         listJawaban.add(
                             LogSkrinningModel.JawabanUser(
@@ -101,6 +99,7 @@ class SkrinningActivity : AppCompatActivity() {
                                 jawabanModel.jawaban
                             )
                         )
+                        updateSoal(listSoalModel)
                     }
                     lyt_jawaban.addView(button)
                 }
@@ -117,6 +116,8 @@ class SkrinningActivity : AppCompatActivity() {
         if (!idDocHS.isNullOrEmpty()) {
             reffHS = mDB.collection(Const.HS).document(idDocHS)
         }
+        val curUser = FirebaseAuth.getInstance().currentUser
+        val reffUser = mDB.collection(Const.user).document(curUser?.uid!!)
         mDB.runBatch {
             it.update(reffUser, "kondisiPsikologis", kondisi)
             it.update(reffUser, "lastSkrinning", Timestamp.now())

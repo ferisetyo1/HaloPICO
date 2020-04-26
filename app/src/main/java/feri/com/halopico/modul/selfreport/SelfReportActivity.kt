@@ -1,17 +1,29 @@
 package feri.com.halopico.modul.selfreport
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import feri.com.halopico.R
+import feri.com.halopico.model.LogSkrinningModel
 import feri.com.halopico.model.SoalModel
+import feri.com.halopico.util.Const
 import kotlinx.android.synthetic.main.activity_self_report.*
 
 class SelfReportActivity : AppCompatActivity() {
 
     var counter = 0
+    var listJawaban = ArrayList<LogSkrinningModel.JawabanUser>()
+    val mDB = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_self_report)
@@ -24,29 +36,114 @@ class SelfReportActivity : AppCompatActivity() {
         listSoalModel: ArrayList<SoalModel>
     ) {
         if (listSoalModel.size <= counter) {
-                startActivity(Intent(this, ThankYou::class.java))
-                finish()
+            val curUser = FirebaseAuth.getInstance().currentUser
+            val reffUser = mDB.collection(Const.user).document(curUser?.uid!!)
+            val builderdialog = AlertDialog.Builder(this)
+            builderdialog.setCancelable(false)
+            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            builderdialog.setView(inflater.inflate(R.layout.progress, null))
+            val dialog = builderdialog.create()
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+            val docData = hashMapOf(
+                "statusData" to 2,
+                "selfReport" to listJawaban,
+                "selfReportHasil" to cekSelfReportResult()
+            )
+            mDB.runBatch {
+                it.update(reffUser, docData as Map<String, Any>)
+            }.addOnCompleteListener {
+                dialog.dismiss()
+                if (it.isSuccessful) {
+                    startActivity(Intent(this, ThankYou::class.java))
+                    finish()
+                }
+            }
         } else {
             soal.text = listSoalModel.get(counter).pertanyaan
-            listSoalModel.get(counter).jawaban.forEach {
-                val button = MaterialButton(this).apply {
-                    cornerRadius = 25
-                    text = it.jawaban
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            this@SelfReportActivity,
-                            R.color.SecondKemenkes
+            listSoalModel.get(counter).apply {
+                val soalModel = this
+                jawaban.forEach {
+                    val jawaban = it
+                    val button = MaterialButton(this@SelfReportActivity).apply {
+                        cornerRadius = 25
+                        text = it.jawaban
+                        setBackgroundColor(
+                            ContextCompat.getColor(
+                                this@SelfReportActivity,
+                                R.color.SecondKemenkes
+                            )
                         )
-                    )
+                    }
+                    button.setOnClickListener {
+                        lyt_jawaban.removeAllViews()
+                        if (soalModel.id.equals("SR-011") && jawaban.jawaban.equals(
+                                "tidak",
+                                true
+                            )
+                        ) {
+                            counter++
+                        }
+                        listJawaban.add(
+                            LogSkrinningModel.JawabanUser(
+                                soalModel.id,
+                                jawaban.jawaban
+                            )
+                        )
+                        updateSoal(listSoalModel)
+                    }
+                    lyt_jawaban.addView(button)
                 }
-                button.setOnClickListener {
-                    lyt_jawaban.removeAllViews()
-                    updateSoal(listSoalModel)
-                }
-                lyt_jawaban.addView(button)
             }
 
         }
         counter++
+    }
+
+    fun cekSelfReportResult(): String {
+        if (
+            (listJawaban.get(0).jawaban.equals("ya", true) ||
+                    listJawaban.get(1).jawaban.equals("ya", true) ||
+                    listJawaban.get(2).jawaban.equals("ya", true)) &&
+            (listJawaban.get(3).jawaban.equals("tidak", true) &&
+                    listJawaban.get(4).jawaban.equals("tidak", true) &&
+                    listJawaban.get(5).jawaban.equals("tidak", true) &&
+                    listJawaban.get(6).jawaban.equals("tidak", true) &&
+                    listJawaban.get(7).jawaban.equals("tidak", true))
+        ) {
+            return "OTG"
+        } else if (
+            listJawaban.get(0).jawaban.equals("ya", true) &&
+            listJawaban.get(1).jawaban.equals("ya", true) &&
+            listJawaban.get(2).jawaban.equals("ya", true) &&
+            listJawaban.get(3).jawaban.equals("ya", true) &&
+            listJawaban.get(4).jawaban.equals("ya", true) &&
+            listJawaban.get(5).jawaban.equals("ya", true) &&
+            listJawaban.get(6).jawaban.equals("ya", true) &&
+            listJawaban.get(7).jawaban.equals("ya", true)
+        ) {
+            if (listJawaban.get(8).jawaban.equals("ya", true) &&
+                listJawaban.get(9).jawaban.equals("ya", true)
+            ) {
+                return "PDP"
+            } else {
+                return "ODP"
+            }
+        } else if (
+            listJawaban.get(0).jawaban.equals("tidak", true) &&
+            listJawaban.get(1).jawaban.equals("tidak", true) &&
+            listJawaban.get(2).jawaban.equals("tidak", true) &&
+            listJawaban.get(3).jawaban.equals("tidak", true) &&
+            listJawaban.get(4).jawaban.equals("tidak", true) &&
+            listJawaban.get(5).jawaban.equals("tidak", true) &&
+            listJawaban.get(6).jawaban.equals("tidak", true) &&
+            listJawaban.get(7).jawaban.equals("tidak", true) &&
+            listJawaban.get(8).jawaban.equals("tidak", true) &&
+            listJawaban.get(9).jawaban.equals("tidak", true)
+        ) {
+            return "tidak ada paparan"
+        } else {
+            return "tidak terdifinisi"
+        }
     }
 }

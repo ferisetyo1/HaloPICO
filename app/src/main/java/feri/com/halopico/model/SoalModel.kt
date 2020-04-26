@@ -23,11 +23,13 @@ class SoalModel(
 
     constructor() : this("", "", -1, "", arrayListOf())
 
+    @Keep
+    @IgnoreExtraProperties
     @Parcelize
     class JawabanModel(
         val jawaban: String,
         val point: Int
-    ) : Parcelable {
+    ) : Parcelable{
 
         constructor() : this("", -1)
 

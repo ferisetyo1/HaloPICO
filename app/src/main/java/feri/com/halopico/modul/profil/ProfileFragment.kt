@@ -5,20 +5,21 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import feri.com.halopico.R
 import feri.com.halopico.model.UserModel
-import feri.com.halopico.modul.autentikasi.LoginActivity
 import feri.com.halopico.modul.MainActivity
+import feri.com.halopico.modul.autentikasi.LoginActivity
 import feri.com.halopico.util.Const
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -41,7 +42,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val builderdialog = AlertDialog.Builder(context!!)
+        val builderdialog = AlertDialog.Builder(requireContext())
         builderdialog.setCancelable(false)
         val inflater =
             context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -52,16 +53,16 @@ class ProfileFragment : Fragment() {
 
         val curUser = mAuth.currentUser
         val reffUser = mDB.collection(Const.user).document(curUser?.uid!!)
-        reffUser.get().addOnSuccessListener {
+        reffUser.get(Source.CACHE).addOnSuccessListener {
             dialog.dismiss()
             if (it.exists()) {
                 val user = it.toObject(UserModel::class.java)
-                Glide.with(context!!)
+                Glide.with(requireContext())
                     .asDrawable()
                     .load(user?.imgURL.toString())
                     .circleCrop()
                     .transition(withCrossFade())
-                    .error(ContextCompat.getDrawable(context!!,
+                    .error(ContextCompat.getDrawable(requireContext(),
                         R.drawable.circle_error
                     ))
                     .into(imageProfil)
@@ -74,6 +75,10 @@ class ProfileFragment : Fragment() {
 
         txt_profilCh.setOnClickListener {
             startActivity(Intent(context, UbahProfilActivity::class.java))
+        }
+
+        txt_passwordCh.setOnClickListener {
+            startActivity(Intent(context,UbahPasswordActivity::class.java))
         }
 
         txt_keluar.setOnClickListener {

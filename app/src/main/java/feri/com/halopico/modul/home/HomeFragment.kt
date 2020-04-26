@@ -1,32 +1,33 @@
 package feri.com.halopico.modul.home
 
-import android.content.ActivityNotFoundException
-import android.content.ContentResolver
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import feri.com.halopico.R
-import feri.com.halopico.data.Data
 import feri.com.halopico.model.SoalModel
 import feri.com.halopico.modul.MainActivity
 import feri.com.halopico.modul.autentikasi.LoginActivity
+import feri.com.halopico.modul.dialog.dialog_rekomendasi
 import feri.com.halopico.modul.histori.HistoryActivity
+import feri.com.halopico.modul.lihatselfreport.LihatSelfReport
 import feri.com.halopico.modul.skrinning.SkrinningActivity
 import feri.com.halopico.util.Const
 import feri.com.halopico.util.Helper
-import kotlinx.android.synthetic.main.bottom_sheet_recomm.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -37,18 +38,33 @@ class HomeFragment : Fragment() {
 
     val mAuth = FirebaseAuth.getInstance()
     val mDB = FirebaseFirestore.getInstance()
+    private val STORAGE_CODE: Int = 1001
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            //system OS >= Marshmallow(6.0), check permission is enabled or not
+            if (checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_DENIED
+            ) {
+                //permission was not granted, request it
+                val permissions = arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                requestPermissions(permissions, STORAGE_CODE)
+            }
+        }
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val builderdialog = AlertDialog.Builder(context!!)
+        val builderdialog = AlertDialog.Builder(requireContext())
         builderdialog.setCancelable(false)
         val inflater =
             context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -58,7 +74,7 @@ class HomeFragment : Fragment() {
         dialog.show()
         val curUser = mAuth.currentUser
         val reffUser = mDB.collection(Const.user).document(curUser?.uid!!)
-        reffUser.get().addOnSuccessListener {
+        reffUser.get(Source.CACHE).addOnSuccessListener {
             dialog.dismiss()
             if (it.exists()) {
                 nama_user.text = "${nama_user.text} ${it.getString("nama")?.split(" ")?.get(0)}"
@@ -76,7 +92,7 @@ class HomeFragment : Fragment() {
         }
 
         update_btn.setOnClickListener {
-            val builderdialog = AlertDialog.Builder(context!!)
+            val builderdialog = AlertDialog.Builder(requireContext())
             builderdialog.setCancelable(false)
             val inflater =
                 context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -84,7 +100,7 @@ class HomeFragment : Fragment() {
             val dialog = builderdialog.create()
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
-            mDB.collection(Const.soal).whereEqualTo("tipe", 1).get()
+            mDB.collection(Const.soal).whereEqualTo("tipe", 1).get(Source.CACHE)
                 .addOnSuccessListener {
                     dialog.dismiss()
                     if (!it.isEmpty) {
@@ -115,56 +131,31 @@ class HomeFragment : Fragment() {
             startActivity(Intent(context, HistoryActivity::class.java))
         }
         btn_rekom.setOnClickListener {
-            val bts = BottomSheetDialog(context!!)
-            val parentView = layoutInflater.inflate(R.layout.bottom_sheet_recomm, null)
-            parentView.video.setOnClickListener {
-                var id = Data.ytKondisigetid(
-                    psikologisConditional.text.toString().replace("(", "").replace(")", "")
-                )
-                if (!id.isNullOrEmpty()) {
-                    val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$id"))
-                    val webIntent = Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("http://www.youtube.com/watch?v=$id")
-                    )
-                    try {
-                        context!!.startActivity(appIntent)
-                    } catch (ex: ActivityNotFoundException) {
-                        context!!.startActivity(webIntent)
-                    }
+            val bts = dialog_rekomendasi(
+                psikologisConditional.text.toString().replace("(", "").replace(")", "")
+            )
+            bts.show(parentFragmentManager, "DialogRekomendasi")
+        }
+        btn_selfreport.setOnClickListener {
+            startActivity(Intent(requireContext(),LihatSelfReport::class.java))
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            STORAGE_CODE -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //permission from popup was granted, call savePdf() method
+                    //Toast.makeText(context!!, "Permission grant...!", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(context, "Konteks tidak tersedia", Toast.LENGTH_LONG).show()
+                    //permission from popup was denied, show error message
+                    //Toast.makeText(context!!, "Permission denied...!", Toast.LENGTH_SHORT).show()
                 }
             }
-            parentView.foto.setOnClickListener {
-                var data = Data.kondisifotoUrl(
-                    psikologisConditional.text.toString().replace("(", "").replace(")", "")
-                )
-                val imageUri = (Uri.Builder())
-                        .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                    .authority(resources.getResourcePackageName(R.drawable.kondisi1))
-                    .appendPath(resources.getResourceTypeName(R.drawable.kondisi1))
-                    .appendPath(resources.getResourceEntryName(R.drawable.kondisi1)+".png")
-                    .build()
-                if (!data.isNullOrEmpty()) {
-//                    val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI.buildUpon().appendPath("kondisi1")
-//                    val intent=Intent(Intent.ACTION_VIEW,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//                    intent.setDataAndType(Uri.parse("android.resource://feri.com.halopico/drawable/$data"),"image/*")
-//                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                    context!!.startActivity(intent)
-//                    startActivity(
-//                        Intent(
-//                            Intent.ACTION_VIEW,
-//                            imageUri
-//                        ).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//                    )
-                } else {
-                    Toast.makeText(context, "Konteks tidak tersedia", Toast.LENGTH_LONG).show()
-                }
-            }
-            bts.setContentView(parentView)
-            bts.show()
         }
     }
 

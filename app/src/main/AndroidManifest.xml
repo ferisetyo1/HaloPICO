@@ -3,6 +3,7 @@
     package="feri.com.halopico">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,22 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".modul.histori.HistoryActivity"></activity>
+        <activity android:name=".modul.profil.UbahPasswordActivity"></activity>
+        <activity android:name=".modul.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".modul.lihatselfreport.LihatSelfReport" />
+        <activity android:name=".modul.ZoomingImage" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/provider_path" />
+
+        <activity android:name=".modul.histori.HistoryActivity" />
         <activity android:name=".modul.profil.UbahProfilActivity" />
         <activity android:name=".modul.skrinning.ResultSkrinningActivity" />
         <activity android:name=".modul.skrinning.SkrinningActivity" />
@@ -20,12 +36,17 @@
         <activity android:name=".modul.datadiri.DataDiriActivity" />
         <activity android:name=".modul.autentikasi.RegisterActivity" />
         <activity android:name=".modul.autentikasi.LoginActivity" />
-        <activity android:name=".modul.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".modul.MainActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="feri.com.halopico.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_path" />
+        </provider>
     </application>
 
 </manifest>

@@ -1,12 +1,11 @@
 package feri.com.halopico.data
 
-import android.util.Log
+import feri.com.halopico.R
 import feri.com.halopico.model.SoalModel
 
 object Data {
 
     fun ytKondisigetid(s: String): String {
-        Log.d("print", "$s")
         return when (s) {
             "Tidak ada perubahan" -> "8r-FUO_nA-U"
             "Risiko gangguan psikologis" -> "JMdhZseLm9U"
@@ -17,15 +16,14 @@ object Data {
         }
     }
 
-    fun kondisifotoUrl(s: String): String {
-        Log.d("print", "$s")
+    fun kondisifotoUrl(s: String): Int {
         return when (s) {
-            "Tidak ada perubahan" -> "kondisi1"
-            "Risiko gangguan psikologis" -> "kondisi2"
-            "Perubahan kondisi psikologis" -> "kondisi3"
-            "Khawatir" -> "kondisi4"
-            "Sedih" -> "kondisi5"
-            else -> ""
+            "Tidak ada perubahan" -> R.drawable.kondisi1
+            "Risiko gangguan psikologis" -> R.drawable.kondisi2
+            "Perubahan kondisi psikologis" -> R.drawable.kondisi3
+            "Khawatir" -> R.drawable.kondisi4
+            "Sedih" -> R.drawable.kondisi5
+            else -> 0
         }
     }
 
@@ -138,6 +136,16 @@ object Data {
             arrayListOf(
                 SoalModel.JawabanModel("Tidak", 0),
                 SoalModel.JawabanModel("Ya", 0)
+            )
+        ),
+        SoalModel(
+            "SR-012",
+            "Bagaimana hasil tes saudara?",
+            0,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Positif", 0),
+                SoalModel.JawabanModel("Negatif", 0)
             )
         ),
         SoalModel(

@@ -1,8 +1,8 @@
 package feri.com.halopico.modul
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-//        val mdb=FirebaseFirestore.getInstance()
+//        val mdb= FirebaseFirestore.getInstance()
 //        mdb.collection(Const.soal).get().addOnSuccessListener {
 //            if (it.isEmpty){
 //                val batch=mdb.batch()
