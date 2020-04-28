@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="feri.com.halopico.modul.home.HomeFragment"
+        android:name="ublearntech.com.halopico.modul.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="feri.com.halopico.modul.profil.ProfileFragment"
+        android:name="ublearntech.com.halopico.modul.profil.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

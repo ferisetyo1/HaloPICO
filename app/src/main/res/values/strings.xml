@@ -24,4 +24,5 @@
     <string name="provinsi">Provinsi</string>
     <string name="tenaga_kesehatan">Tenaga Kesehatan</string>
     <string name="tanggal_lahir">Tanggal Lahir</string>
+    <string name="dev_by">Dinas Kesehatan Provinsi Jawa Timur\n Departemen Keperawatan Jiwa Universitas Brawijaya\n Fakultas Ilmu Komputer Universitas Brawijaya</string>
 </resources>

@@ -34,6 +34,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444839413973:android:d62b84f7e1e165e3917a5c",
+        "android_client_info": {
+          "package_name": "ublearntech.com.halopico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444839413973-jmropp303ljif0nm7beuud08427le414.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAstkiqmLEJ2rrYvYViBzOy5QevhbGicdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444839413973-jmropp303ljif0nm7beuud08427le414.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

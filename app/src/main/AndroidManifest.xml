@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="feri.com.halopico">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ublearntech.com.halopico"
+    tools:ignore="LockedOrientationActivity">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -12,35 +14,64 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".modul.profil.UbahPasswordActivity"></activity>
-        <activity android:name=".modul.SplashActivity">
+        <activity android:name=".modul.konsultasi.KonsultasiActivity"></activity>
+        <activity
+            android:name=".modul.profil.UbahPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".modul.lihatselfreport.LihatSelfReport" />
-        <activity android:name=".modul.ZoomingImage" />
+        <activity
+            android:name=".modul.lihatselfreport.LihatSelfReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.ZoomingImage"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/provider_path" />
 
-        <activity android:name=".modul.histori.HistoryActivity" />
-        <activity android:name=".modul.profil.UbahProfilActivity" />
-        <activity android:name=".modul.skrinning.ResultSkrinningActivity" />
-        <activity android:name=".modul.skrinning.SkrinningActivity" />
-        <activity android:name=".modul.selfreport.ThankYou" />
-        <activity android:name=".modul.selfreport.SelfReportActivity" />
-        <activity android:name=".modul.datadiri.DataDiriActivity" />
-        <activity android:name=".modul.autentikasi.RegisterActivity" />
-        <activity android:name=".modul.autentikasi.LoginActivity" />
-        <activity android:name=".modul.MainActivity" />
+        <activity
+            android:name=".modul.histori.HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.profil.UbahProfilActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.skrinning.ResultSkrinningActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.skrinning.SkrinningActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.selfreport.ThankYou"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.selfreport.SelfReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.datadiri.DataDiriActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.autentikasi.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.autentikasi.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.MainActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="feri.com.halopico.provider"
+            android:authorities="ublearntech.com.halopico.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

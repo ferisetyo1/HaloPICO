@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.0"
 
     defaultConfig {
-        applicationId "feri.com.halopico"
+        applicationId "ublearntech.com.halopico"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 1

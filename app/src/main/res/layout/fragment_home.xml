@@ -14,8 +14,9 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:background="@color/PrimaryKemenkes"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,11 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Halo,"
-            android:textColor="@android:color/white"
+            android:textColor="@color/PrimaryKemenkes"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cardView"
-            app:layout_constraintEnd_toEndOf="@+id/cardView" />
+            app:layout_constraintStart_toStartOf="@+id/cardView" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -68,18 +69,17 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/kondisi_img"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="150dp"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/ic_sentiment"
-                        android:tint="@color/PrimaryKemenkes" />
+                        android:src="@drawable/belum"/>
 
                     <TextView
                         android:id="@+id/psikologisConditional"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(Belum Skrinning)"
+                        android:text="(Belum Screenning)"
                         android:textAlignment="center"
                         android:textSize="18dp"
                         android:textStyle="bold|italic" />
@@ -166,7 +166,7 @@
                 android:drawableTop="@drawable/ic_history"
                 android:drawableTint="@color/PrimaryKemenkes"
                 android:fontFamily="sans-serif"
-                android:text="Riwayat Skrinning"
+                android:text="Riwayat Screenning"
                 android:textAllCaps="false"
                 android:textColor="@color/PrimaryKemenkes"
                 android:textSize="14sp"
@@ -191,7 +191,7 @@
                 android:typeface="monospace" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton2"
+                android:id="@+id/btn_pakar"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -199,10 +199,10 @@
                 android:autoSizeMinTextSize="10sp"
                 android:autoSizeTextType="uniform"
                 android:autoText="true"
-                android:drawableTop="@drawable/ic_book"
+                android:drawableTop="@drawable/ic_contact_phone_black_24dp"
                 android:drawableTint="@color/PrimaryKemenkes"
                 android:fontFamily="sans-serif"
-                android:text="Panduan Skrinning"
+                android:text="Konsultasi Pakar"
                 android:textAllCaps="false"
                 android:textColor="@color/PrimaryKemenkes"
                 android:textSize="14sp"
