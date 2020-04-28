@@ -27,6 +27,7 @@ object Data {
             else -> 0
         }
     }
+
     fun getIlustrasi(s: String): Int {
         return when (s) {
             "Tidak ada perubahan" -> R.drawable.tidak_ada
@@ -58,15 +59,75 @@ object Data {
             ""
         ),
         PakarModel(
-            "Ns, Rany agustin W, S. Kep. M.kep",
+            "Ns, Rany agustin W, S. Kep. M.Kep",
             "Bondowoso ",
             "085230382900",
             ""
         ),
         PakarModel(
-            "Adelheid Riswanti Herminsih, S.Kep.Ns., M.Kep, Maumere",
-            "NTT",
+            "Adelheid Riswanti Herminsih, S.Kep.Ns., M.Kep",
+            "Maumare, NTT",
             "082147993658",
+            ""
+        ),
+        PakarModel(
+            "Yuldensia Avelina, S.Kep.Ns., M.Kep",
+            "Maumere, NTT ",
+            "081233695883",
+            ""
+        ),
+        PakarModel(
+            "Ns. Destianti Indah Mayasari, M.Kep",
+            "Cilacap, Jawa Tengah",
+            "085291095210",
+            ""
+        ),
+        PakarModel(
+            "Fepyani Thresna Feoh, S.Kep.Ns.M.Kep",
+            "Kupang, NTT ",
+            "085333650646",
+            ""
+        ),
+        PakarModel(
+            "Dwi yogyo Suswinarto. S.Kep. Ns. M.Kep",
+            "Palu, Sulawesi Tengah",
+            "081243749868",
+            ""
+        ),
+        PakarModel(
+            "Widya Lita Fitrianur, S.Kep.Ns.M.Kep",
+            "Gresik, Jawa Timur",
+            "081336585077",
+            ""
+        ),
+        PakarModel(
+            "Yanti Rosdiana, S.Kep.Ns.M.Kep",
+            "Malang, Jawa Timur",
+            "081249554004",
+            ""
+        ),
+        PakarModel(
+            "Gardha Rias Arsy, S.Kep., Ns., M.Kep",
+            "Kudus, Jawa Timur",
+            "085712771227",
+            ""
+        ),
+        PakarModel(
+            "Aisyah Dzil Kamalah S.kep, Ns., M.Kep",
+            "Pekalongan, Jawa Tengah",
+            "08156968112",
+            ""
+        ),
+        PakarModel(
+            "Awaliyah M Suwetty.S.kep, Ns., M.Kep",
+            "Kupang, NTT",
+            "085239026776",
+            ""
+        ),
+        PakarModel(
+            "Ns. Faizatur rohmi, M. Kep",
+            "Malang, Jawa Timur",
+            "085236743093",
             ""
         )
     )

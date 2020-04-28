@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.modul.autentikasi.LoginActivity
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        val mdb= FirebaseFirestore.getInstance()
+//        val mdb= FirebaseFirestore.getInstance()
 //        mdb.collection(Const.Pakar).get().addOnSuccessListener {
 //            if (it.isEmpty){
 //                val batch=mdb.batch()

@@ -54,7 +54,10 @@ class LoginActivity : AppCompatActivity() {
                     .addOnSuccessListener { documentSnapshot ->
                         val user = documentSnapshot.toObject(UserModel::class.java)
                         when (user?.statusData) {
-                            0 -> startActivity(Intent(this, DataDiriActivity::class.java))
+                            0 -> {
+                                startActivity(Intent(this, DataDiriActivity::class.java))
+                                finish()
+                            }
                             1 -> {
                                 mDB.collection(Const.soal).whereEqualTo("tipe", 0).get(Source.CACHE)
                                     .addOnSuccessListener {
@@ -78,7 +81,10 @@ class LoginActivity : AppCompatActivity() {
                                         ).show()
                                     }
                             }
-                            2 -> startActivity(Intent(this, MainActivity::class.java))
+                            2 -> {
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            }
                         }
                     }.addOnFailureListener {
                         dialog.dismiss()
