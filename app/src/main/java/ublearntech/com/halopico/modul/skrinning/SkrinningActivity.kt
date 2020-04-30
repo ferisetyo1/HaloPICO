@@ -12,24 +12,25 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import kotlinx.android.synthetic.main.activity_skrinning.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.model.LogSkrinningModel
 import ublearntech.com.halopico.model.SoalModel
 import ublearntech.com.halopico.util.Const
-import kotlinx.android.synthetic.main.activity_skrinning.*
+import ublearntech.com.halopico.util.DBHelper
 
 class SkrinningActivity : AppCompatActivity() {
 
     private lateinit var dialog: AlertDialog
     var counter = 0
     var pointSkrinning = 0
-    val mDB = FirebaseFirestore.getInstance()
+    val mDB = DBHelper.getDb()
 
     var tipe = 0
     var listJawaban = ArrayList<LogSkrinningModel.JawabanUser>()
@@ -77,6 +78,8 @@ class SkrinningActivity : AppCompatActivity() {
             }
         } else {
             txt_soal.text = listSoalModel.get(counter).pertanyaan
+            Glide.with(this).asDrawable().load(listSoalModel.get(counter).imageUrl)
+                .error(R.drawable.item_pertanyaan).into(gambar)
             listSoalModel.get(counter).apply {
                 val soalID = this.id
                 jawaban.forEach { jawabanModel ->

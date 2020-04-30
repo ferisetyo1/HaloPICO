@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="Pengkajian Awal Covid-19"
+        android:text="Self-Reporting Questionnaire"
         android:textColor="@color/PrimaryKemenkes"
         android:textSize="24sp"
         android:textStyle="bold"

@@ -14,13 +14,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_data_diri.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.data.Data
 import ublearntech.com.halopico.model.SoalModel
-import ublearntech.com.halopico.modul.selfreport.SelfReportActivity
+import ublearntech.com.halopico.modul.selfreport.SelfReportCovidActivity
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -28,7 +28,7 @@ import kotlin.collections.ArrayList
 class DataDiriActivity : AppCompatActivity() {
 
     val mAuth = FirebaseAuth.getInstance()
-    val mDB = FirebaseFirestore.getInstance()
+    val mDB = DBHelper.getDb()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,48 +36,66 @@ class DataDiriActivity : AppCompatActivity() {
         setContentView(R.layout.activity_data_diri)
 
         val items_jk = listOf("Laki-Laki", "Perempuan")
-        val adapter_jk = ArrayAdapter(this,
-            R.layout.text_layout, items_jk)
+        val adapter_jk = ArrayAdapter(
+            this,
+            R.layout.text_layout, items_jk
+        )
         dropdown_jk.setAdapter(adapter_jk)
-        val items_pendidikan = listOf("SD", "SMP", "SMA", "Sarjana")
-        val adapter_pendidikan = ArrayAdapter(this,
-            R.layout.text_layout, items_pendidikan)
+        val items_pendidikan = listOf("SD", "SMP", "SMA", "Sarjana", "Magister", "Doktor")
+        val adapter_pendidikan = ArrayAdapter(
+            this,
+            R.layout.text_layout, items_pendidikan
+        )
         dropdown_pendidikan.setAdapter(adapter_pendidikan)
         val items_pekerjaan = Data.getPekerjaan()
-        val adapter_pekerjaan = ArrayAdapter(this,
-            R.layout.text_layout, items_pekerjaan)
+        val adapter_pekerjaan = ArrayAdapter(
+            this,
+            R.layout.text_layout, items_pekerjaan
+        )
         dropdown_pekerjaan.setAdapter(adapter_pekerjaan)
         dropdown_pekerjaan.setOnItemClickListener { adapterView, view, i, l ->
             val text = (view as TextView).text.toString()
             if (text.equals("Tenaga Kesehatan")) {
                 lyt_dropdown_teKes.visibility = View.VISIBLE
+                et_lyt_institusi.visibility = View.VISIBLE
                 val items_tekes = Data.getTenagaKesehatan()
-                val adapter_tekes = ArrayAdapter(this,
-                    R.layout.text_layout, items_tekes)
+                val adapter_tekes = ArrayAdapter(
+                    this,
+                    R.layout.text_layout, items_tekes
+                )
                 dropdown_tekes.setAdapter(adapter_tekes)
             } else {
                 lyt_dropdown_teKes.visibility = View.GONE
+                dropdown_tekes.setText("")
+                et_institusi.setText("")
+                et_lyt_institusi.visibility = View.GONE
             }
         }
         val items_provinsi = Data.getListProvinsi()
-        val adapter_provinsi = ArrayAdapter(this,
-            R.layout.text_layout, items_provinsi)
+        val adapter_provinsi = ArrayAdapter(
+            this,
+            R.layout.text_layout, items_provinsi
+        )
         dropdown_provinsi.setAdapter(adapter_provinsi)
         dropdown_provinsi.setOnItemClickListener { adapterView, view, i, l ->
             val items_kota = Data.getListKota((view as TextView).text.toString())
-            val adapter_kota = ArrayAdapter(this,
-                R.layout.text_layout, items_kota)
+            val adapter_kota = ArrayAdapter(
+                this,
+                R.layout.text_layout, items_kota
+            )
             dropdown_kota.setAdapter(adapter_kota)
         }
         val items_kota = Data.getListKota("Aceh")
-        val adapter_kota = ArrayAdapter(this,
-            R.layout.text_layout, items_kota)
+        val adapter_kota = ArrayAdapter(
+            this,
+            R.layout.text_layout, items_kota
+        )
         dropdown_kota.setAdapter(adapter_kota)
         et_tgllahir.setOnClickListener {
             setOnDate()
         }
         et_tgllahir.setOnFocusChangeListener { view, b ->
-            if (view.isFocused){
+            if (view.isFocused) {
                 setOnDate()
             }
         }
@@ -141,6 +159,7 @@ class DataDiriActivity : AppCompatActivity() {
                 }
             )
             it.update(reffUser, "alamat", et_alamat.text.toString())
+            it.update(reffUser, "institusi", et_institusi.text.toString())
             it.update(reffUser, "statusData", 1)
         }.addOnCompleteListener {
             if (it.isSuccessful) {
@@ -153,7 +172,7 @@ class DataDiriActivity : AppCompatActivity() {
                             val list = ArrayList<SoalModel>()
                             list.addAll(it.toObjects(SoalModel::class.java))
                             startActivity(
-                                Intent(this, SelfReportActivity::class.java)
+                                Intent(this, SelfReportCovidActivity::class.java)
                                     .putExtra("listSoal", list)
                             )
                             finish()
@@ -195,6 +214,7 @@ class DataDiriActivity : AppCompatActivity() {
         lyt_dropdown_teKes.error = null
         lyt_dropdown_pendidikan.error = null
         lyt_dropdown_jk.error = null
+        et_lyt_institusi.error = null
 
         if (et_tgllahir.text.isNullOrEmpty()) {
             et_tgllahir.requestFocus()
@@ -223,6 +243,12 @@ class DataDiriActivity : AppCompatActivity() {
         if (dropdown_pekerjaan.text.equals("Tenaga Kesehatan") && dropdown_tekes.text.isNullOrEmpty()) {
             dropdown_tekes.requestFocus()
             lyt_dropdown_teKes.error = "Harap isi field yang kosong"
+            return false
+        }
+
+        if (dropdown_pekerjaan.text.equals("Tenaga Kesehatan") && et_institusi.text.isNullOrEmpty()) {
+            dropdown_tekes.requestFocus()
+            et_lyt_institusi.error = "Harap isi field yang kosong"
             return false
         }
 

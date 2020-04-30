@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.fragment_profile.*
 import ublearntech.com.halopico.R
@@ -19,13 +18,14 @@ import ublearntech.com.halopico.model.UserModel
 import ublearntech.com.halopico.modul.MainActivity
 import ublearntech.com.halopico.modul.autentikasi.LoginActivity
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 
 /**
  * A simple [Fragment] subclass.
  */
 class ProfileFragment : Fragment() {
 
-    private val mDB = FirebaseFirestore.getInstance()
+    private val mDB = DBHelper.getDb()
     private val mAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(

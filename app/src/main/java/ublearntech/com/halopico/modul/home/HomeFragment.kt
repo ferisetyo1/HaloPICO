@@ -17,7 +17,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.fragment_home.*
 import ublearntech.com.halopico.R
@@ -31,6 +30,7 @@ import ublearntech.com.halopico.modul.konsultasi.KonsultasiActivity
 import ublearntech.com.halopico.modul.lihatselfreport.LihatSelfReport
 import ublearntech.com.halopico.modul.skrinning.SkrinningActivity
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 import ublearntech.com.halopico.util.Helper
 
 
@@ -40,7 +40,7 @@ import ublearntech.com.halopico.util.Helper
 class HomeFragment : Fragment() {
 
     val mAuth = FirebaseAuth.getInstance()
-    val mDB = FirebaseFirestore.getInstance()
+    val mDB = DBHelper.getDb()
     private val STORAGE_CODE: Int = 1001
 
     override fun onCreateView(

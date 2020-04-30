@@ -4,25 +4,25 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_register.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.model.UserModel
 import ublearntech.com.halopico.modul.datadiri.DataDiriActivity
 import ublearntech.com.halopico.util.Const
-import kotlinx.android.synthetic.main.activity_register.*
+import ublearntech.com.halopico.util.DBHelper
 
 class RegisterActivity : AppCompatActivity() {
 
     val mAuth = FirebaseAuth.getInstance()
-    val mDB = FirebaseFirestore.getInstance()
+    val mDB = DBHelper.getDb()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +61,7 @@ class RegisterActivity : AppCompatActivity() {
                         dialog.dismiss()
                         if (it.isSuccessful) {
                             startActivity(Intent(this, DataDiriActivity::class.java))
+                            finish()
                         } else {
                             Toast.makeText(
                                 this,

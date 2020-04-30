@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_konsultasi.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.model.PakarModel
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 
 class KonsultasiActivity : AppCompatActivity() {
 
@@ -25,7 +25,7 @@ class KonsultasiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_konsultasi)
 
-        val query = FirebaseFirestore.getInstance().collection(Const.Pakar)
+        val query = DBHelper.getDb().collection(Const.Pakar)
         rv_option = FirestoreRecyclerOptions.Builder<PakarModel>()
             .setQuery(query, PakarModel::class.java)
             .build()

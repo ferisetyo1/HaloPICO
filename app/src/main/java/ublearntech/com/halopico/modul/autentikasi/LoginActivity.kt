@@ -11,21 +11,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
 import kotlinx.android.synthetic.main.activity_login.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.model.SoalModel
 import ublearntech.com.halopico.model.UserModel
 import ublearntech.com.halopico.modul.MainActivity
 import ublearntech.com.halopico.modul.datadiri.DataDiriActivity
-import ublearntech.com.halopico.modul.selfreport.SelfReportActivity
+import ublearntech.com.halopico.modul.selfreport.SelfReportCovidActivity
+import ublearntech.com.halopico.modul.selfreport.SelfReportQActivity
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 
 class LoginActivity : AppCompatActivity() {
 
     val mAuth = FirebaseAuth.getInstance()
-    val mDB = FirebaseFirestore.getInstance()
+    val mDB = DBHelper.getDb()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 val curUser = mAuth.currentUser
-                mDB.collection(Const.user).document(curUser?.uid!!).get(Source.CACHE)
+                mDB.collection(Const.user).document(curUser?.uid!!).get()
                     .addOnSuccessListener { documentSnapshot ->
                         val user = documentSnapshot.toObject(UserModel::class.java)
                         when (user?.statusData) {
@@ -59,14 +59,14 @@ class LoginActivity : AppCompatActivity() {
                                 finish()
                             }
                             1 -> {
-                                mDB.collection(Const.soal).whereEqualTo("tipe", 0).get(Source.CACHE)
+                                mDB.collection(Const.soal).whereEqualTo("tipe", 0).get()
                                     .addOnSuccessListener {
                                         dialog.dismiss()
                                         if (!it.isEmpty) {
                                             val list = ArrayList<SoalModel>()
                                             list.addAll(it.toObjects(SoalModel::class.java))
                                             startActivity(
-                                                Intent(this, SelfReportActivity::class.java)
+                                                Intent(this, SelfReportCovidActivity::class.java)
                                                     .putExtra("listSoal", list)
                                             )
                                             finish()
@@ -82,6 +82,29 @@ class LoginActivity : AppCompatActivity() {
                                     }
                             }
                             2 -> {
+                                mDB.collection(Const.soal).whereEqualTo("tipe", 4).get()
+                                    .addOnSuccessListener {
+                                        dialog.dismiss()
+                                        if (!it.isEmpty) {
+                                            val list = ArrayList<SoalModel>()
+                                            list.addAll(it.toObjects(SoalModel::class.java))
+                                            startActivity(
+                                                Intent(this, SelfReportQActivity::class.java)
+                                                    .putExtra("listSoal", list)
+                                            )
+                                            finish()
+                                        }
+                                    }
+                                    .addOnFailureListener {
+                                        dialog.dismiss()
+                                        Toast.makeText(
+                                            this,
+                                            it.localizedMessage,
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                            }
+                            3->{
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             }

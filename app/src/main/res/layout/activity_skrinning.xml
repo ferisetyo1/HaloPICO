@@ -63,7 +63,7 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/gambar"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 app:srcCompat="@drawable/ic_image" />

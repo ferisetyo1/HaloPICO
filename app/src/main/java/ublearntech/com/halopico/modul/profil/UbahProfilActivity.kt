@@ -13,19 +13,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_ubah_profil.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.data.Data
 import ublearntech.com.halopico.model.UserModel
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class UbahProfilActivity : AppCompatActivity() {
 
-    private val mDB = FirebaseFirestore.getInstance()
+    private val mDB = DBHelper.getDb()
     private val mAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class UbahProfilActivity : AppCompatActivity() {
             R.layout.text_layout, items_jk
         )
         dropdown_jk.setAdapter(adapter_jk)
-        val items_pendidikan = listOf("SD", "SMP", "SMA", "Sarjana")
+        val items_pendidikan = listOf("SD", "SMP", "SMA", "Sarjana","Magister","Doktor")
         val adapter_pendidikan = ArrayAdapter(
             this,
             R.layout.text_layout, items_pendidikan
@@ -54,6 +54,7 @@ class UbahProfilActivity : AppCompatActivity() {
             val text = (view as TextView).text.toString()
             if (text.equals("Tenaga Kesehatan")) {
                 lyt_dropdown_teKes.visibility = View.VISIBLE
+                et_lyt_institusi.visibility = View.VISIBLE
                 val items_tekes = Data.getTenagaKesehatan()
                 val adapter_tekes = ArrayAdapter(
                     this,
@@ -62,6 +63,9 @@ class UbahProfilActivity : AppCompatActivity() {
                 dropdown_tekes.setAdapter(adapter_tekes)
             } else {
                 lyt_dropdown_teKes.visibility = View.GONE
+                dropdown_tekes.setText("")
+                et_lyt_institusi.visibility = View.GONE
+                et_institusi.setText("")
             }
         }
         val items_provinsi = Data.getListProvinsi()
@@ -108,21 +112,31 @@ class UbahProfilActivity : AppCompatActivity() {
             dialog.dismiss()
             if (it.exists()) {
                 val user = it.toObject(UserModel::class.java)
-                et_fullname.setText(user?.nama)
-                et_tgllahir.setText(user?.tglLahir)
-                et_nohp.setText(user?.nohp)
-                dropdown_jk.setText(user?.jenisKelamin, false)
-                dropdown_pendidikan.setText(user?.riwayatPendidikan, false)
-                dropdown_pekerjaan.setText(user?.pekerjaan, false)
-                if (dropdown_pekerjaan.text.equals("Tenaga Kesehatan")) {
-                    dropdown_tekes.setText(user?.pekerjaan, false)
+                et_fullname.setText(user!!.nama)
+                et_tgllahir.setText(user.tglLahir)
+                et_nohp.setText(user.nohp)
+                dropdown_jk.setText(user.jenisKelamin, false)
+                dropdown_pendidikan.setText(user.riwayatPendidikan, false)
+                if(Data.getTenagaKesehatan().contains(user.pekerjaan)){
+                    dropdown_pekerjaan.setText("Tenaga Kesehatan",false)
+                    dropdown_tekes.setText(user.pekerjaan,false)
+                    et_institusi.setText(user.institusi)
                     lyt_dropdown_teKes.visibility = View.VISIBLE
-                } else {
-                    lyt_dropdown_teKes.visibility = View.GONE
+                    et_lyt_institusi.visibility = View.VISIBLE
+                    val items_tekes = Data.getTenagaKesehatan()
+                    val adapter_tekes = ArrayAdapter(
+                        this,
+                        R.layout.text_layout, items_tekes
+                    )
+                    dropdown_tekes.setAdapter(adapter_tekes)
+                }else if(Data.getPekerjaan().contains(user.pekerjaan)){
+                    dropdown_pekerjaan.setText(user.pekerjaan,false)
+                }else{
+                    dropdown_pekerjaan.setText("")
                 }
-                dropdown_provinsi.setText(user?.provinsi, false)
-                dropdown_kota.setText(user?.kota, false)
-                et_alamat.setText(user?.alamat)
+                dropdown_provinsi.setText(user.provinsi, false)
+                dropdown_kota.setText(user.kota, false)
+                et_alamat.setText(user.alamat)
             }
         }.addOnFailureListener {
             dialog.dismiss()
@@ -187,6 +201,7 @@ class UbahProfilActivity : AppCompatActivity() {
                 }
             )
             it.update(reffUser, "alamat", et_alamat.text.toString())
+            it.update(reffUser, "institusi", et_institusi.text.toString())
         }.addOnCompleteListener {
             dialog.dismiss()
             if (it.isSuccessful) {
@@ -217,6 +232,7 @@ class UbahProfilActivity : AppCompatActivity() {
         lyt_dropdown_teKes.error = null
         lyt_dropdown_pendidikan.error = null
         lyt_dropdown_jk.error = null
+        et_lyt_institusi.error = null
 
         if (et_fullname.text.isNullOrEmpty()) {
             et_fullname.requestFocus()
@@ -257,6 +273,11 @@ class UbahProfilActivity : AppCompatActivity() {
         if (dropdown_pekerjaan.text.equals("Tenaga Kesehatan") && dropdown_tekes.text.isNullOrEmpty()) {
             dropdown_tekes.requestFocus()
             lyt_dropdown_teKes.error = "Harap isi field yang kosong"
+            return false
+        }
+        if (dropdown_pekerjaan.text.equals("Tenaga Kesehatan") && et_institusi.text.isNullOrEmpty()) {
+            dropdown_tekes.requestFocus()
+            et_lyt_institusi.error = "Harap isi field yang kosong"
             return false
         }
 

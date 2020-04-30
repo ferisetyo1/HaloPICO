@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_result_skrinning.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.data.Data
@@ -20,12 +19,13 @@ import ublearntech.com.halopico.model.SoalModel
 import ublearntech.com.halopico.modul.MainActivity
 import ublearntech.com.halopico.modul.ZoomingImage
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 
 class ResultSkrinningActivity : AppCompatActivity() {
 
     private var kondisi: String? = null
     private lateinit var dialog: AlertDialog
-    private val mDB = FirebaseFirestore.getInstance()
+    private val mDB = DBHelper.getDb()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

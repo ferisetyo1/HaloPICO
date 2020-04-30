@@ -60,7 +60,7 @@ object Data {
         ),
         PakarModel(
             "Ns, Rany agustin W, S. Kep. M.Kep",
-            "Bondowoso ",
+            "Bondowoso, Jawa Timur",
             "085230382900",
             ""
         ),
@@ -128,6 +128,150 @@ object Data {
             "Ns. Faizatur rohmi, M. Kep",
             "Malang, Jawa Timur",
             "085236743093",
+            ""
+        ),
+        PakarModel(
+            "NS. Dhita Kurnia Sari, M. Kep",
+            "Kediri, Jawa Timur",
+            "082231216464",
+            ""
+        ),
+        PakarModel(
+            "Ns,Fransiska Erna Damayanti,M.Kep",
+            "Banyuwangi , Jawa Timur",
+            "085729588725",
+            ""
+        ),
+        PakarModel(
+            "Wenny Nugrahati Carsita, S.Kep.,Ns.,M.Kep",
+            "Indramayu Jawa Barat",
+            "085222179916",
+            ""
+        ),
+        PakarModel(
+            "Helena Pangaribuan, S.kep.Ns.M.Kep",
+            "Palu",
+            "081342779588",
+            ""
+        ),
+        PakarModel(
+            "Ns. Natar Fitri Napitupulu,  M. Kep.",
+            "Padangsidimpuan",
+            "081225171988",
+            ""
+        ),
+        PakarModel(
+            "NSirli Mardianna Trishinta, S.Kep.,Ns.,M.Kep",
+            "Malang",
+            "081615630041",
+            ""
+        ),
+        PakarModel(
+            "Maryati A. Barimbing, S.Kep., Ns., M.Kep",
+            "Kupang, NTT.",
+            "085339276311",
+            ""
+        ),
+        PakarModel(
+            "Miftakhul Ulfa, S.Kep.Ners.M.Kep",
+            "Malang ",
+            "085646561160",
+            ""
+        ),
+        PakarModel(
+            "Reni Nurhidayah, Ns.,M.Kep",
+            "Kediri",
+            "085736406427",
+            ""
+        ),
+        PakarModel(
+            "Kurnia Laksana, S.Kep. Ns.  M.Kep",
+            "MALANG ",
+            "081232187446",
+            ""
+        ),
+        PakarModel(
+            "Ariani Sulistyorini, S.Pd.,M.Kep",
+            "Kediri",
+            "08123412247",
+            ""
+        ),
+        PakarModel(
+            "Iva Milia Hani Rahmawati, S.Kep.,Ns. M.Kep",
+            "Jombang",
+            "081554717515",
+            ""
+        ),
+        PakarModel(
+            "Indari, S.Kep.,Ners.M.Kep",
+            "Malang",
+            "081334392582",
+            ""
+        ),
+        PakarModel(
+            "Ns. Indah Mukarromah, S.Kep., M.Kep.",
+            "Jombang  ",
+            "085730750019",
+            ""
+        ),
+        PakarModel(
+            "Bambang Wiseno, M.Kep",
+            "Kediri",
+            "081221460327",
+            ""
+        ),
+        PakarModel(
+            "Zulian Effendi, S.Kep., NS., M.Kep",
+            "Palembang ",
+            "081373331158",
+            ""
+        ),
+        PakarModel(
+            "Betie Febriana, S.Kep., NS., M.Kep ",
+            "Semarang",
+            "081314774618",
+            ""
+        ),
+        PakarModel(
+            "Lilik Setiawan, S.Kep.Ns.,M.Kep",
+            "Kediri",
+            "085604817881",
+            ""
+        ),
+        PakarModel(
+            "Primasari Mahardhika Rahmawati, S.Kep., Ns., M.Kep.",
+            "Lumajang ",
+            "082231205554",
+            ""
+        ),
+        PakarModel(
+            "Nurul mawaddah, S. Kep., Ns. M. Kep.",
+            "Mojokerto",
+            "081359524065",
+            ""
+        ),
+        PakarModel(
+            "Ns. Yeni Fitria, M.Kep.",
+            "Jember ",
+            "085733474485",
+            ""
+        ),
+        PakarModel(
+            "Ns. Evy Aristawati, S.Kep., M.Kep",
+            "Pasuruan",
+            "085733684721",
+            ""
+        ),
+        PakarModel(
+            "Ns. Abdul Rokhman, M.Kep. ",
+            "Lamongan ",
+            "085655090492",
+            ""
+        ),
+        PakarModel(
+            "Muhammad Rosyidul 'Ibad, S.Kep.,Ns.,M.Kep ",
+            "Malang  ",
+            "085790819817",
             ""
         )
     )
@@ -780,7 +924,298 @@ object Data {
                     3
                 )
             )
+        ),
+        SoalModel(
+            "SRQ-001",
+            "Apakah Anda sering menderita sakit kepala?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-002",
+            "Apakah Anda kehilangan nafsu makan?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-003",
+            "Apakah tidur Anda tidak lelap?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-004",
+            "Apakah Anda mudah menjadi takut?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-005",
+            "Apakah Anda merasa cemas, tegang dan khawatir?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-006",
+            "Apakah tangan Anda gemetar?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-007",
+            "Apakah Anda mengalami gangguan pencernaan?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-008",
+            "Apakah Anda merasa sulit berpikir jernih?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-009",
+            "Apakah Anda merasa tidak bahagia?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-010",
+            "Apakah Anda lebih sering menangis?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-011",
+            "Apakah Anda merasa sulit untuk menikmati aktivitas sehari-hari?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-012",
+            "Apakah Anda mengalami kesulitan untuk mengambil keputusan?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-013",
+            "Apakah aktivitas/tugas sehari-hari Anda terbengkalai?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-014",
+            "Apakah Anda merasa tidak mampu berperan dalam kehidupan ini?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-015",
+            "Apakah Anda kehilangan minat terhadap banyak hal?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-016",
+            "Apakah Anda merasa tidak berharga?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-017",
+            "Apakah Anda mempunyai pikiran untuk mengakhiri hidup Anda?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-018",
+            "Apakah Anda merasa lelah sepanjang waktu?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-019",
+            "Apakah Anda merasa tidak enak di perut?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-020",
+            "Apakah Anda mudah lelah?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-021",
+            "Apakah Anda minum alkohol lebih banyak dari biasanya atau Apakah Anda menggunakan narkoba?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-022",
+            "Apakah Anda yakin bahwa seseorang mencoba mencelakai Anda dengan cara tertentu?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-023",
+            "Apakah ada yang mengganggu atau hal yang tidak biasa dalam pikiran Anda?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-024",
+            "Apakah Anda pernah mendengar suara tanpa tahu sumbernya atau yang orang lain tidak dapat mendengar?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-025",
+            "Apakah Anda mengalami mimpi yang mengganggu tentang suatu bencana/musibah atau adakah saat-saat Anda seolah mengalami kembali kejadian bencana itu? ",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-026",
+            "Apakah Anda menghindari kegiatan, tempat, orang atau pikiran yang mengingatkan Anda akan bencana tersebut?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-027",
+            "Apakah minat Anda terhadap teman dan kegiatan yang biasa Anda lakukan berkurang?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-028",
+            "Apakah Anda merasa sangat terganggu jika berada dalam situasi yang mengingatkan Anda akan bencana atau jika Anda berpikir tentang bencana itu?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
+        ),
+        SoalModel(
+            "SRQ-029",
+            "Apakah Anda kesulitan memahami atau mengekspresikan perasaan Anda?",
+            4,
+            "",
+            arrayListOf(
+                SoalModel.JawabanModel("Tidak",0),
+                SoalModel.JawabanModel("Ya",0)
+            )
         )
+
     )
 
     fun getPekerjaan(): List<String> {

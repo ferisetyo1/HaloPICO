@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_history.*
 import ublearntech.com.halopico.R
 import ublearntech.com.halopico.model.LogSkrinningModel
 import ublearntech.com.halopico.modul.dialog.dialog_rekomendasi
 import ublearntech.com.halopico.util.Const
+import ublearntech.com.halopico.util.DBHelper
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -26,9 +26,9 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
 
-        val query = FirebaseFirestore.getInstance().collection(Const.HS)
+        val query = DBHelper.getDb().collection(Const.HS)
             .whereEqualTo("user_id", FirebaseAuth.getInstance().currentUser?.uid!!)
-            .orderBy("tanggal", Query.Direction.DESCENDING)
+            .orderBy("tanggal",Query.Direction.DESCENDING)
         rv_option = FirestoreRecyclerOptions.Builder<LogSkrinningModel>()
             .setQuery(query, LogSkrinningModel::class.java)
             .build()
