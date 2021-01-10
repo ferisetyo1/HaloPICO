@@ -36,8 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:tint="@color/PrimaryKemenkes"
         android:onClick="back"
+        android:tint="@color/PrimaryKemenkes"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
         app:layout_constraintStart_toStartOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@+id/view5"
@@ -47,8 +47,60 @@
         android:id="@+id/pv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/PrimaryKemenkes"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:srcCompat="@drawable/ic_dinaskesehatanlogo" />
+
+        <ImageView
+            android:id="@+id/imageView20"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="2dp"
+            app:srcCompat="@drawable/ub_logo" />
+
+        <ImageView
+            android:id="@+id/imageView21"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="2dp"
+            app:srcCompat="@drawable/filkom_logo" />
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="2dp"
+            app:srcCompat="@drawable/lab_logo_dark" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeTextType="uniform"
+            android:text="Pendamping Kesehatan Jiwa Anda"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:textStyle="italic" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

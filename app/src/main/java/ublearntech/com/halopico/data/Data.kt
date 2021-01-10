@@ -8,11 +8,11 @@ object Data {
 
     fun ytKondisigetid(s: String): String {
         return when (s) {
-            "Tidak ada perubahan" -> "8r-FUO_nA-U"
-            "Risiko gangguan psikologis" -> "JMdhZseLm9U"
-            "Perubahan kondisi psikologis" -> "wrz58Jx17JM"
-            "Khawatir" -> "cYcdiANgz9k"
-            "Sedih" -> "AcTgyPJ5CH4"
+            "Tidak ada perubahan" -> "HG7hvxEe4T4"
+            "Risiko gangguan psikologis" -> "BEq9AUEM_tE"
+            "Perubahan kondisi psikologis" -> "U0DMlK_xiZI"
+            "Khawatir" -> "fbDJ8PpwWyA"
+            "Sedih" -> "ZyvQGpHHJ0c"
             else -> ""
         }
     }
